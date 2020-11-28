@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- HTML標籤的屬性綁定 -->
+        <a v-bind:href="link">Go</a>
+
+        <!-- class,style  如果屬性有特殊符號的屬性需要用雙(單)引號包住，或是用鴕峰式命名方式 -->
+        <!-- 綁定的內容可寫成物件{} -->
+        <!-- v-bind指令可縮寫成冒號 EX: v-bind:style=""  => :style="" -->
+        <!-- 這部分是單向綁定的，也就是只有Vue實體內容改變畫面元素會跟著改變，就算改變畫面元素也無法改變Vue實體內容的值 -->
+        <!-- 若為true則注入至class中 -->
+        <span v-bind:class="{active:isActive, 'text-danger':hasError}"
+            v-bind:style="{color: myColor, fontSize:size}">How are you?</span>
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                link: 'https://www.google.com',
+                isActive: true,
+                hasError: false,
+                myColor: 'red',
+                size: '30px'
+            }
+        })
+    </script>
+</body>
+
+</html>
