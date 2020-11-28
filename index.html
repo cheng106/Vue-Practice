@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <!-- 使用v-model雙向綁定，直接修改值也可立即改變畫面 -->
+        <input type="text" v-model="content">
+        <h1>I'm {{name}}</h1>
+        <h2>Say:{{content}}</h2>
+        <!-- 使用v-on監聽DOM事件，在觸發的時候執行一些JavaScript語法 -->
+        <button v-on:click="number++">Good! {{number}}</button>
+        <button v-on:click="cancel">Cancel</button>
+    </div>
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+
+    <script>
+        // el:用來綁定某個元素
+        // data:將資料給元素，使用{{Key名稱}}這種格式即可
+        let vm = new Vue({
+            el: '#app', // 綁定元素
+            data: { // 封裝資料
+                name: 'Mark',
+                content: 'Hi',
+                number: 1,
+            },
+            methods: { // 封裝方法
+                cancel() {
+                    this.number--;
+                }
+            }
+        })
+        // 
+    </script>
+</body>
+
+</html>

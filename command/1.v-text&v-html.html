@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 使用這種方式顯示畫面時，如網路速度慢時會直接顯示{{msg}}這種格式，對畫面來說不是很好 -->
+        {{msg}} {{hello()}} {{hi('very good~')}} {{2+5}}<br>
+        <!-- 使用vue指令的話則不會顯示，等到畫面載入完成後才顯示 -->
+        <span v-html="msg"></span> <br>
+        <span v-text="msg"></span> <br>
+        
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                msg: '<h1>Hello</h1>',
+                name: 'Mark'
+            },
+            methods: { // 兩種方式都可以
+                hello: function () {
+                    return 'Hello';
+                },
+                hi(content) {
+                    return 'Hi,' + this.name + ' ' + content;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
