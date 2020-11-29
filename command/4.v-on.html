@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- ＠事件修飾 -->
+        <!-- 事件中直接寫JS程式碼 另外v-on指令可以簡寫成at EX: v-on:click="" -> @click="" -->
+        <button v-on:click="number++">讚</button>
+        <!-- 事件指定一個回調函數，必須是Vue實體中定義的函數 -->
+        <button @click="cancel">取消</button>
+        <h1>有{{number}}個讚</h1>
+
+        <!-- 也可以將設定阻止事件冒泡
+            (以下面範例來說：點小div會跳出兩次alert，因為事件傳遞到大div，這就是冒泡) -->
+        <!-- <div style="border: 1px solid red;padding:20px" v-on:click="hello">
+            大div
+            <div style="border:1px solid blue;padding:20px" @click="hello">
+                小div <br>
+                <a href="https://google.com">Go</a>
+            </div>
+        </div> -->
+
+        <!-- 可讓元素只能點擊一次，只要在後面加上once即可 -->
+        <div style="border: 1px solid red;padding:20px" v-on:click.once="hello">
+            大div（我只能被點一次）
+            <!-- 修改成阻止事件冒泡，事件改成@click.stop即可 -->
+            <div style="border:1px solid blue;padding:20px" @click.stop="hello">
+                小div（我有阻止事件冒泡）<br>
+                <!-- 也可阻止預設的行為，不想讓a標籤跳轉到連結，這個標籤依然有冒泡行為 -->
+                <a href="https://google.com" @click.prevent="hello">Go-A（我有阻止預設行為）</a>
+                <!-- 若想阻止預設行為又阻止事件冒泡，只需要在後面再新增stop --> <br>
+                <a href="https://yahoo.com.tw" @click.prevent.stop="hello">Go-B（我有阻止預設行為和冒泡）</a>
+            </div>
+        </div>
+        <!-- ================================================================================= -->
+        <!-- 按鍵修飾 -->
+        <!-- 這部分也可以寫keyCode或是組合按鍵，像是@click.alt(Mac的是option)，就是要先按alt再點擊，就可以讓值變成10 -->
+        <input type="text" v-model="number" v-on:keyup.up="number+=2" @keyup.down="number-=2" @click.alt="number=10"><br>
+        提示：
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                number: 1,
+            },
+            methods: {
+                cancel: function () {
+                    this.number--;
+                },
+                hello() {
+                    alert("click~~")
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

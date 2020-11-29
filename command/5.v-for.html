@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="(user,index) in users" :key="user.name">
+                編號{{index}}.{{user.name}} => {{user.gender}} => {{user.age}} <br>
+                <!-- 1.顯示使用者訊息：v-for="item in itmes" -->
+                <!-- 2.取得陣列索引：v-for="(item,index) in itmes" -->
+                <!-- 3.遍歷物件：
+                        v-for="value in object" 
+                        v-for="(value, key) in object" 
+                        v-for="(value, key, index) in object" 
+                -->
+                物件訊息：
+                <span v-for="(v,k,i) in user">{{k}} => {{v}} => {{i}}&nbsp;</span>
+                <!-- 4.遍歷的時候都加上:key來區分不同資料，提高vue渲染的效率 -->
+            </li>
+        </ul>
+
+        <ul>
+            <li v-for="(number,index) in numbers" :key="index"></li>
+        </ul>
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                users: [
+                    { name: 'Mark', gender: 'male', age: 30 },
+                    { name: 'Andy', gender: 'male', age: 28 },
+                    { name: 'Jane', gender: 'female', age: 26 },
+                    { name: 'Bob', gender: 'male', age: 33 },
+                    { name: 'Amber', gender: 'female', age: 22 },
+                ],
+                numbers: [1, 2, 3, 4]
+            }
+        })
+    </script>
+</body>
+
+</html>
