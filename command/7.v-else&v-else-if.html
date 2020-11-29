@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 這裡的應用可以在對v-for做結合，結合應用的部分在5.v-for.html-->
+        <button v-on:click="random=Math.random()">Click Me</button>
+        <span>{{random}}</span>
+        <h1 v-if="random >= 0.75">
+            &gt;= 0.75 here!
+        </h1>
+
+        <h1 v-else-if="random >= 0.5">
+            &gt;= 0.5 here!
+        </h1>
+
+        <h1 v-else-if="random >= 0.2">
+            &gt;= 0.2 here!
+        </h1>
+
+        <h1 v-else>
+            &lt;= 0.2
+        </h1>
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                random: 1,
+            }
+        })
+    </script>
+</body>
+
+</html>

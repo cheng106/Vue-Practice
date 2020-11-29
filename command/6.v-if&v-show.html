@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- v-if，條件判斷，結果為true時才會渲染畫面，否則移除該元素 -->
+        <!-- v-show，結果為true時才會顯示元素，否則將元素設定style="display: none;" -->
+        <button v-on:click="show = !show">Click me!</button>
+        <!-- 使用v-if顯示 -->
+        <h1 v-if="show">if=Hi</h1>
+        <!-- 使用v-show顯示 -->
+        <h1 v-show="show">show=Me</h1>
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                show: true
+            }
+        })
+    </script>
+</body>
+
+</html>

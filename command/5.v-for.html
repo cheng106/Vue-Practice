@@ -10,7 +10,7 @@
 <body>
     <div id="app">
         <ul>
-            <li v-for="(user,index) in users" :key="user.name">
+            <li v-for="(user,index) in users" :key="user.name" v-if="user.gender == 'female'">
                 編號{{index}}.{{user.name}} => {{user.gender}} => {{user.age}} <br>
                 <!-- 1.顯示使用者訊息：v-for="item in itmes" -->
                 <!-- 2.取得陣列索引：v-for="(item,index) in itmes" -->
