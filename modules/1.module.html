@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <button v-on:click="count++">我被點了{{count}}次</button>
+
+        <!-- 使用component，直接使用標籤的方式，而且資料不會互相影響-->
+        <counter></counter>
+        <counter></counter>
+        <counter></counter>
+
+        <!-- 使用私有component -->
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        // 1.全域圈告註冊一個component
+        // (這方式和new Vue差異不大，template就等於是el，只是el只能掛載於某個元素，而template可以自定義)
+        // (而data(){}就等於new Vue的data:{}，而其他在new Vue可以使用的屬性，在Vue.component都可以使用)
+        Vue.component("counter", {
+            template: `<button v-on:click="count++">我被點了{{count}}次</button>`,
+            data() {
+                return {
+                    count: 1
+                }
+            }
+        })
+
+        // 2.也可以宣告一個私有component
+        const buttonCounter = {
+            template: `<button v-on:click="count++">我被點了~{{count}}次~</button>`,
+            data() {
+                return {
+                    count: 1
+                }
+            }
+        }
+        new Vue({
+            el: '#app',
+            data: {
+                count: 1,
+            },
+            // 使用component這個屬性（component的名稱：宣告的變數名稱）
+            components: {
+                "button-counter": buttonCounter,
+            }
+        })
+    </script>
+</body>
+
+</html>

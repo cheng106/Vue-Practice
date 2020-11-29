@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <span id="number">{{number}}</span>
+        <button @click="number++">讚！</button>
+        <h2>{{name}}，有{{number}}個人點讚！</h2>
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                name: 'Mark',
+                number: 100
+            },
+            methods: {
+                show() {
+                    return this.name;
+                },
+                add() {
+                    this.number++;
+                }
+            },
+            beforeCreate() {
+                console.log('=====beforeCreate=====');
+                // 此時不管要取什麼東西都會出現錯誤
+                console.log('資料模型未載入⛔：' + this.name, this.number);
+                console.log('方法未載入⛔：' + this.show());
+                console.log('html模版未載入⛔：' + document.getElementById("number"))
+            },
+            created() {
+                console.log('=====created=====');
+                console.log('資料模型已載入👌：' + this.name, this.number);
+                console.log('方法已載入👌：' + this.show());
+                console.log('html模版已載入👌：' + document.getElementById("number"))
+                // 雖然實際的值已經改變，但這個階段還是無法顯示在畫面上，因此就顯示{{number}}
+                console.log('html模版未渲染⛔：' + document.getElementById("number").innerText)
+            },
+            beforeMount() {
+                console.log('=====beforeMount=====')
+                // 這階段依然把值顯示於畫面
+                console.log('html模版未渲染⛔：' + document.getElementById("number").innerText)
+            },
+            mounted() {
+                console.log('=====mounted=====')
+                // 這階段才會將值顯示於畫面
+                console.log('html模版已渲染👌：' + document.getElementById("number").innerText)
+            },
+            beforeUpdate() {
+                // 只要number的資料被改變，就會觸發這個鉤子函數
+                console.log('=====beforeUpdate=====')
+                console.log('資料模型已更新👌：' + this.number)
+                console.log('html模版未更新⛔：' + document.getElementById("number").innerText)
+            },
+            updated() {
+                // 只要number的資料被改變，就會觸發這個鉤子函數
+                console.log('=====updated=====')
+                console.log('資料模型已更新👌：' + this.number)
+                console.log('html模版已更新👌：' + document.getElementById("number").innerText)
+            },
+        })
+    </script>
+</body>
+
+</html>
