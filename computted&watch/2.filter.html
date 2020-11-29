@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 過濾器常用來處理文字格式化的操作，過濾棄用在兩個地方：雙大刮號和v-bind指令 -->
+        <ul>
+            <li v-for="user in userList">
+                {{user.id}} => {{user.name}} =>
+                使用JS直接判斷：{{user.gender == 1?'男':'女'}} =>
+                使用私有filters判斷：{{user.gender | genderFilter}} =>
+                使用全域filter判斷：{{user.gender | gFilter}}
+            </li>
+        </ul>
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        // 全域過濾器
+        Vue.filter("gFilter", function (value) {
+            return value === 1 ? '男~' : '女~'
+        })
+
+        new Vue({
+            el: '#app',
+            data: {
+                userList: [
+                    { id: '1', name: 'John', gender: 1 },
+                    { id: '2', name: 'Jane', gender: 0 }
+                ]
+            },
+            filters: {
+                // filters 定義私有過濾器，只可在目前的vue實體中使用
+                genderFilter(value) {
+                    return value === 1 ? '男' : '女'
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

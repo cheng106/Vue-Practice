@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 某些結果是基於之前的資料即時計算出來的，可以利用計算屬性來完成 -->
+        <ul>
+            <li>西遊記 價格：{{cPrice}}，數量：<input type="number" v-model="cNum"></li>
+            <li>水滸傳 價格：{{sPrice}}，數量：<input type="number" v-model="sNum"></li>
+            <li>總價：{{totalPrice}}</li><br>
+            <span>{{msg}}</span>
+        </ul>
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        // watch監聽器，可以監控一個值的變化，達到某個條件後就觸發事件
+        new Vue({
+            el: '#app',
+            data: {
+                cPrice: 99.98,
+                sPrice: 98.7,
+                cNum: 1,
+                sNum: 1,
+                msg: ''
+            },
+            computed: {
+                totalPrice() {
+                    // 只要有值改變就會更新總價
+                    return this.cPrice * this.cNum + this.sPrice * this.sNum;
+                }
+            },
+            watch: {
+                // 把想監控的data名稱寫在watch中，用函示的方法寫條件和要做的事情
+                cNum(newVal, oldVal) {
+                    // alert('newVal=' + newVal + " -> oldVal=" + oldVal)
+                    if (newVal >= 3) {
+                        this.msg = "已超出庫存"
+                        this.cNum = 3
+                    } else {
+                        this.msg = ""
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
